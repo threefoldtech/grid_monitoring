@@ -1,0 +1,51 @@
+name: grid-monitoring
+
+on:
+  schedule:
+    - cron:  '*/15 * * * *'
+  push:
+    branches: [ master ]
+
+jobs:
+  sent-telegram-message:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Gathering dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git python3-pip python3-venv python3-setuptools tmux redis restic nginx cron wireguard
+          sudo pip3 install --upgrade setuptools wheel
+          sudo pip3 install check-wheel-contents poetry
+          sudo pip3 install python-telegram-bot
+          git clone https://github.com/threefoldtech/js-sdk.git
+      - name: Install
+        run: |
+          cd js-sdk
+          git checkout development_vdc
+          sudo poetry install
+      - name: Validates pyproject.toml
+        run: |
+          cd js-sdk
+          poetry check
+      - name: Build the wheels archives
+        run: |
+          cd js-sdk
+          poetry build --format wheel
+      - name: confirm that the wheel is pip-installable
+        run: |
+          cd js-sdk
+          python3 -m pip install dist/*.whl
+      - name: run bot script
+        env:
+          TNAME: ${{ secrets.TNAME }}
+          EMAIL: ${{ secrets.EMAIL }}
+          WORDS: ${{ secrets.WORDS }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          cp bot.py js-sdk
+          cp grid_monitoring.py js-sdk
+          sudo --preserve-env=TNAME --preserve-env=EMAIL --preserve-env=WORDS --preserve-env=CHAT_ID --preserve-env=TOKEN && cd js-sdk && poetry shell & python3 bot.py
