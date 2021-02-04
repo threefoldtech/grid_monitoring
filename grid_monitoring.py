@@ -97,7 +97,7 @@ def check_wallets():
                 if int(float(balance.balance)) < notlessthanX:
                     if wname == "mainnet":
                         wname = "explorer"
-                    info_log.append(f"{wname} wallet on {network} balance {balance} is less than {notlessthanX} , needs funding") 
+                    info_log.append(f"Wallet name: {wname}\nAddress: {balances.address}\nAsset: {asset_code.upper()}\nCurrent Balance: {balance.balance}") 
                 else:
                     print(f"{wname} wallet on {network} balance {balance} is ok, greater than {notlessthanX}") 
 
@@ -181,5 +181,8 @@ def check_grid(self):
     j.core.identity.delete(identity_name)
     return [e1, e2, e3, e4, e5, e6]
 
+# class Test:
+#     pass
 # if __name__ == "__main__":
+#     self = Test()
 #     print(check_grid(self))
