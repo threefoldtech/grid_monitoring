@@ -3,7 +3,7 @@ from jumpscale.data.time import utcnow as now
 
 from jumpscale.clients.stellar.wrapped import Server
 from jumpscale.clients.stellar.balance import AccountBalances, Balance
-
+import ssl_monitoring as ssl
 import os
 
 _THREEFOLDFOUNDATION_TFTSTELLAR_SERVICES = {"STD": "https://tokenservices.threefold.io"} # "TEST": "https://testnet.threefold.io"
@@ -177,9 +177,10 @@ def check_grid(self):
     e4 = check_threefold_services()
     e5 = get_public_ip_usage("devnet")
     e6 = get_public_ip_usage("testnet")
-
+    e7 = ssl.get_ssl_cert_monitoring()
     j.core.identity.delete(identity_name)
-    return [e1, e2, e3, e4, e5, e6]
+
+    return [e1, e2, e3, e4, e5, e6, e7]
 
 # class Test:
 #     pass

@@ -1,6 +1,4 @@
-# -*- encoding: utf-7 -*-
-# requires a recent enough python with idna support in socket
-# pyopenssl, cryptography and idna
+
 
 from OpenSSL import SSL
 from cryptography import x509
@@ -9,6 +7,9 @@ import idna
 
 from socket import socket
 from collections import namedtuple
+
+import concurrent.futures
+from datetime import datetime
 
 HostInfo = namedtuple(field_names='cert hostname peername', typename='HostInfo')
 
@@ -67,31 +68,57 @@ def get_issuer(cert):
         return None
 
 
-def print_basic_info(hostinfo):
-    s = '''» {hostname} « … {peername}
-    \tcommonName: {commonname}
-    \tSAN: {SAN}
-    \tissuer: {issuer}
-    \tnotBefore: {notbefore}
-    \tnotAfter:  {notafter}
-    '''.format(
-            hostname=hostinfo.hostname,
-            peername=hostinfo.peername,
-            commonname=get_common_name(hostinfo.cert),
-            SAN=get_alt_names(hostinfo.cert),
-            issuer=get_issuer(hostinfo.cert),
-            notbefore=hostinfo.cert.not_valid_before,
-            notafter=hostinfo.cert.not_valid_after
-    )
-    print(s)
+def get_basic_info(hostinfo):
+    s = {
+        hostinfo.hostname: {
+            "peername": hostinfo.peername,
+            "commonname": get_common_name(hostinfo.cert),
+            "SAN": get_alt_names(hostinfo.cert),
+            "issuer": get_issuer(hostinfo.cert),
+            "notbefore": hostinfo.cert.not_valid_before,
+            "notafter": hostinfo.cert.not_valid_after
+        }
+    }
+    # s = '''» {hostname} « … {peername}
+    # \tcommonName: {commonname}
+    # \tSAN: {SAN}
+    # \tissuer: {issuer}
+    # \tnotBefore: {notbefore}
+    # \tnotAfter:  {notafter}
+    # '''.format(
+    #         hostname=hostinfo.hostname,
+    #         peername=hostinfo.peername,
+    #         commonname=get_common_name(hostinfo.cert),
+    #         SAN=get_alt_names(hostinfo.cert),
+    #         issuer=get_issuer(hostinfo.cert),
+    #         notbefore=hostinfo.cert.not_valid_before,
+    #         notafter=hostinfo.cert.not_valid_after
+    # )
+    return s
 
 def check_it_out(hostname, port):
     hostinfo = get_certificate(hostname, port)
-    print_basic_info(hostinfo)
+    get_basic_info(hostinfo)
 
+def get_ssl_cert_monitoring():
+    today = datetime.now()
+    log_info = []
 
-import concurrent.futures
-if __name__ == '__main__':
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as e:
         for hostinfo in e.map(lambda x: get_certificate(x[0], x[1]), HOSTS):
-            print_basic_info(hostinfo)
+            expire = hostinfo.cert.not_valid_after - today
+            if expire.days < 7:
+                log_info.append(f"SSL Certificate of domain {hostinfo.hostname} will be expire in {expire.days}")
+            else:
+                print(f"SSL Certificate of domain {hostinfo.hostname} will be expire in {expire.days}")
+
+# if __name__ == '__main__':
+#     today = datetime.now()
+#     log_info = []
+#     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as e:
+#         for hostinfo in e.map(lambda x: get_certificate(x[0], x[1]), HOSTS):
+#             expire = hostinfo.cert.not_valid_after - today
+#             if expire.days < 7:
+#                 log_info.append(f"SSL Certificate of domain {hostinfo.hostname} will be expire in {expire.days}")
+#     print(log_info)
+            
