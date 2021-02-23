@@ -157,6 +157,23 @@ def get_public_ip_usage(explorer_name: str = "devnet"):
 
     return [f"{explorer_name} IPs \n busy:: {c} | free:: {len(farm.ipaddresses)-c} | total:: {len(farm.ipaddresses)}"]
 
+def check_access_nodes():
+    info_log = []
+    for expname, expurl in EXPLORERS.items():
+        res = []
+        nodes = j.clients.explorer.get(expname, expurl).nodes.list()
+        ip_filter = j.sals.zos.get().nodes_finder.filter_public_ip4
+
+        res = [
+            node.node_id for node in nodes if ip_filter(node) and j.sals.zos.get().nodes_finder.filter_is_up(node)
+        ]
+        if res:
+            print(f"{expname}: {res}")
+        else:
+            info_log.append(f"{expname} explorer does not have any access nodes")
+    
+    return info_log
+
 def check_grid(self):
     needed_vars = ["TNAME", "EMAIL", "WORDS"]
     for var in needed_vars:
@@ -179,9 +196,10 @@ def check_grid(self):
     e5 = get_public_ip_usage("devnet")
     e6 = get_public_ip_usage("testnet")
     e7 = ssl.get_ssl_cert_monitoring()
+    e8 = check_access_nodes()
     j.core.identity.delete(identity_name)
 
-    return [e1, e2, e3, e4, e5, e6, e7]
+    return [e1, e2, e3, e4, e5, e6, e7, e8]
 
 # class Test:
 #     pass
