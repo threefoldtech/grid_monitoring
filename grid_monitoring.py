@@ -55,7 +55,7 @@ def check_threefold_services():
     info_log = []
     for network, addr in _THREEFOLDFOUNDATION_TFTSTELLAR_SERVICES.items():
         try:
-            res = j.tools.http.get(addr)
+            res = j.tools.http.options(addr+"/threefoldfoundation/transactionfunding_service/fund_transaction")
             if res.status_code != 200:
                 info_log.append(f"TOKEN SERVICES: {network} :: {addr} is down 💣")
             # else:
