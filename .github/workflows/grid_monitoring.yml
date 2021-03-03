@@ -24,7 +24,6 @@ jobs:
       - name: Install
         run: |
           cd js-sdk
-          git checkout development_vdc
           sudo poetry install
       - name: Validates pyproject.toml
         run: |
