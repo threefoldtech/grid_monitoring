@@ -155,8 +155,10 @@ def get_public_ip_usage(explorer_name: str = "devnet"):
         owner_tid = workload.info.customer_tid
         user = explorer.users.get(owner_tid)
         print(f"user: {user.name:30}|\ttid: {owner_tid:<5}|\twid: {workload.id}")
-
-    return [f"{explorer_name} IPs \n busy:: {c} | free:: {len(farm.ipaddresses)-c} | total:: {len(farm.ipaddresses)}"]
+    if len(farm.ipaddresses)-c < 5:
+        return [f"Free IPs in {explorer_name}:: {len(farm.ipaddresses)-c} less than 5 IPs"]
+    else:
+        return []
 
 def check_access_nodes():
     info_log = []
