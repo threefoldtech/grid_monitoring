@@ -7,7 +7,8 @@ github_token = os.environ.get("GITHUB_TOKEN")
 def get_prs_title(prs, repo_name):
     prs_title= [f">>>>>> {repo_name} PRs >>>>>>\n"]
     for pr in prs:
-        prs_title.append(f"{pr.title}: {pr.html_url} \n")
+        if not pr.draft:
+            prs_title.append(f"{pr.title}: {pr.html_url} \n")
     return prs_title
 
 g = Github(login_or_token=github_token, per_page=100)
