@@ -1,7 +1,7 @@
 # first install telegram package: pip3 install python-telegram-bot
 import telegram
 import os
-from .github_prs import prs_sdk, prs_jsng, prs_charts
+from github_prs import prs_sdk, prs_jsng, prs_charts
 
 #token that can be generated talking with @BotFather on telegram
 my_token = 'bot_token'
