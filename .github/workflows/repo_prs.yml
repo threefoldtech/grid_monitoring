@@ -1,0 +1,26 @@
+name: grid-monitoring
+
+on:
+  schedule:
+    - cron:  '0 */3 * * *'
+  push:
+    branches: [ master ]
+
+jobs:
+  sent-telegram-message:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Gathering dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git python3-pip python3-venv python3-setuptools tmux redis restic nginx cron wireguard
+          sudo pip3 install python-telegram-bot
+      - name: run bot script
+        env:
+          CHAT_ID: ${{ secrets.CHAT_ID_OPEN_PRs }}
+          TOKEN: ${{ secrets.PRs_TOKEN }}
+        run: |
+          sudo --preserve-env=CHAT_ID_OPEN_PRs --preserve-env=PRs_TOKEN && python3 github_open_prs/bot.py
