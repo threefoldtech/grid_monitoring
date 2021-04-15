@@ -1,4 +1,4 @@
-name: Open pero PRs
+name: Open repo PRs
 
 on:
   schedule:
@@ -20,8 +20,8 @@ jobs:
           sudo pip3 install python-telegram-bot PyGithub
       - name: run bot script
         env:
-          CHAT_ID: ${{ secrets.CHAT_ID_OPEN_PRs }}
-          TOKEN: ${{ secrets.PRs_TOKEN }}
+          CHAT_ID_OPEN_PRs: ${{ secrets.CHAT_ID_OPEN_PRs }}
+          PRs_TOKEN: ${{ secrets.PRs_TOKEN }}
         run: |
           sudo --preserve-env=CHAT_ID_OPEN_PRs --preserve-env=PRs_TOKEN \
           python3 github_open_prs/bot.py
