@@ -18,7 +18,7 @@ if __name__ == "__main__":
     msgs = [prs_jsng, prs_sdk, prs_charts]
     github_prs_token = os.environ.get("PRs_TOKEN")
     chat_id = os.environ.get("CHAT_ID_OPEN_PRs")
-    print(">>>>>>>>>>>>>", chat_id, github_prs_token)
+
     for m in msgs:
         separator = '\n'
         if len(m) > 1:
