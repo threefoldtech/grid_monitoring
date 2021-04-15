@@ -16,8 +16,8 @@ jobs:
       - name: Gathering dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git python3-pip python3-venv PyGithub
-          sudo pip3 install python-telegram-bot
+          sudo apt-get install -y git python3-pip python3-venv
+          sudo pip3 install python-telegram-bot PyGithub
       - name: run bot script
         env:
           CHAT_ID: ${{ secrets.CHAT_ID_OPEN_PRs }}
