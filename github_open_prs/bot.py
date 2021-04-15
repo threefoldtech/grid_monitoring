@@ -23,4 +23,4 @@ if __name__ == "__main__":
         separator = '\n'
         if len(m) > 1:
             ms = separator.join(m)
-            send(msg=ms, chat_id=chat_id, token=my_token)
+            send(msg=ms, chat_id=chat_id, token=github_prs_token)
