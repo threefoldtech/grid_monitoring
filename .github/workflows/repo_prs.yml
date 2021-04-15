@@ -1,4 +1,4 @@
-name: grid-monitoring
+name: Open pero PRs
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  sent-telegram-message:
+  sent-telegram-message-open-PRs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -23,4 +23,5 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID_OPEN_PRs }}
           TOKEN: ${{ secrets.PRs_TOKEN }}
         run: |
-          sudo --preserve-env=CHAT_ID_OPEN_PRs --preserve-env=PRs_TOKEN && python3 github_open_prs/bot.py
+          sudo --preserve-env=CHAT_ID_OPEN_PRs --preserve-env=PRs_TOKEN \
+          python3 github_open_prs/bot.py
