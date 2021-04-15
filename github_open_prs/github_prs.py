@@ -1,7 +1,6 @@
 from github import Github
 import os
 
-import ipdb
 
 github_token = os.environ.get("GITHUB_TOKEN")
 
