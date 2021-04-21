@@ -5,7 +5,7 @@ import os
 github_token = os.environ.get("GITHUB_TOKEN")
 
 def get_prs_title(prs, repo_name):
-    prs_title= [f">>>>>> {repo_name} PRs >>>>>>\n"]
+    prs_title= [f">>>>>> {repo_name} PRs <<<<<<\n"]
     for pr in prs:
         if not pr.draft:
             prs_title.append(f"{pr.title}: {pr.html_url} \n")
