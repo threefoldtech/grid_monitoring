@@ -12,7 +12,7 @@ def send(msg, chat_id, token=my_token):
     chat_id must be a number!
     """
     bot = telegram.Bot(token=token)
-    bot.sendMessage(chat_id=chat_id, text=msg)
+    bot.sendMessage(chat_id=chat_id, text=msg, parse_mode="Markdown", disable_web_page_preview=True)
 
 if __name__ == "__main__":
     msgs = [prs_jsng, prs_sdk, prs_charts]
