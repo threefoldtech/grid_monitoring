@@ -23,6 +23,7 @@ jobs:
           BOT_ISSUES_STATUS: ${{ secrets.BOT_ISSUES_STATUS }}
           CHAT_ID_ISSUES_STATUS: ${{ secrets.CHAT_ID_ISSUES_STATUS }}
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+          TEST_TOKEN: ${{ secrets.TEST_TOKEN }}
         run: |
-          sudo --preserve-env=BOT_ISSUES_STATUS --preserve-env=CHAT_ID_ISSUES_STATUS --preserve-env=PROJECT_NAME \
+          sudo --preserve-env=BOT_ISSUES_STATUS --preserve-env=CHAT_ID_ISSUES_STATUS --preserve-env=PROJECT_NAME --preserve-env=TEST_TOKEN \
           python3 issue_statues/bot.py

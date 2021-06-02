@@ -33,7 +33,7 @@ def get_projects(org):
     print(">>>>>>>>>>>>>>>>>>>", project_name)
     all_projects = org.get_projects()
     for p in all_projects:
-        if p.name == "TFCloud_2.8":
+        if p.name == project_name:
             return p
     return 0
 
