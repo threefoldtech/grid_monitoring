@@ -1,13 +1,13 @@
-name: Open repo PRs
+name: Issue Status
 
 on:
   schedule:
-    - cron:  '0 6,9,12,15 * * 0-4'
-  # push:
-  #   branches: [ master ]
+    - cron:  '0 6 * * 0-4'
+  push:
+    branches: [ master ]
 
 jobs:
-  sent-telegram-message-open-PRs:
+  sent-telegram-message-issue_status:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -20,8 +20,8 @@ jobs:
           sudo pip3 install python-telegram-bot PyGithub
       - name: run bot script
         env:
-          CHAT_ID_OPEN_PRs: ${{ secrets.CHAT_ID_OPEN_PRs }}
-          PRs_TOKEN: ${{ secrets.PRs_TOKEN }}
+          BOT_ISSUES_STATUS: ${{ secrets.BOT_ISSUES_STATUS }}
+          CHAT_ID_ISSUES_STATUS: ${{ secrets.CHAT_ID_ISSUES_STATUS }}
         run: |
-          sudo --preserve-env=CHAT_ID_OPEN_PRs --preserve-env=PRs_TOKEN \
-          python3 github_open_prs/bot.py
+          sudo --preserve-env=BOT_ISSUES_STATUS --preserve-env=CHAT_ID_ISSUES_STATUS \
+          python3 issue_statues/bot.py

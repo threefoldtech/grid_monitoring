@@ -3,8 +3,8 @@ name: grid-monitoring
 on:
   schedule:
     - cron:  '*/15 * * * *'
-  push:
-    branches: [ master ]
+  # push:
+  #   branches: [ master ]
 
 jobs:
   sent-telegram-message:
