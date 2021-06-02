@@ -30,7 +30,6 @@ github_token = os.environ.get("TEST_TOKEN")
 
 def get_projects(org):
     project_name = os.environ.get("PROJECT_NAME")
-    print(">>>>>>>>>>>>>>>>>>>", project_name)
     all_projects = org.get_projects()
     for p in all_projects:
         if p.name == project_name:

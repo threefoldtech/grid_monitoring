@@ -3,8 +3,6 @@ name: Issue Status
 on:
   schedule:
     - cron:  '0 6 * * 0-4'
-  push:
-    branches: [ master ]
 
 jobs:
   sent-telegram-message-issue_status:
