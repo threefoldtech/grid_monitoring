@@ -30,9 +30,10 @@ github_token = os.environ.get("GITHUB_TOKEN")
 
 def get_projects(org):
     project_name = os.environ.get("PROJECT_NAME")
+    print(">>>>>>>>>>>>>>>>>>>", project_name)
     all_projects = org.get_projects()
     for p in all_projects:
-        if p.name == project_name:
+        if p.name == "TFCloud_2.8":
             return p
     return 0
 
