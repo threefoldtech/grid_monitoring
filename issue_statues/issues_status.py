@@ -26,7 +26,7 @@ Users = {'xmonader': '@xmonader',
 
        }
 
-github_token = os.environ.get("GITHUB_TOKEN")
+github_token = "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" #os.environ.get("GITHUB_TOKEN")
 
 def get_projects(org):
     project_name = os.environ.get("PROJECT_NAME")
