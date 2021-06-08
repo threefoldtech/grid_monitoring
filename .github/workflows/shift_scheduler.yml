@@ -15,13 +15,19 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y git python3-pip python3-venv
-          sudo pip3 install python-telegram-bot PyGithub
+          sudo pip3 install python-telegram-bot
+      - name: get pointers
+        uses: actions/download-artifact@v2
+        with:
+          name: pointers
       - name: run bot script
         env:
           BOT_SHIFT_SCHEDULER: ${{ secrets.BOT_SHIFT_SCHEDULER }}
-          CHAT_ID_ISSUES_STATUS: ${{ secrets.CHAT_ID_ISSUES_STATUS }}
-          PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-          TEST_TOKEN: ${{ secrets.TEST_TOKEN }}
+          CHAT_ID_ISSUES_STATUS: ${{ secrets.CHAT_ID_SCHEDULER }}
         run: |
-          sudo --preserve-env=BOT_SHIFT_SCHEDULER --preserve-env=CHAT_ID_ISSUES_STATUS --preserve-env=PROJECT_NAME --preserve-env=TEST_TOKEN \
-          python3 shift_scheduler/bot.py
+          python3 shift_scheduler.py
+      - name: save pointers
+        uses: actions/upload-artifact@v2
+        with:
+          name: save pointers
+          path: pointers
