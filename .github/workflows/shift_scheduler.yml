@@ -1,0 +1,27 @@
+name: shift_scheduler.yml
+
+on:
+  schedule:
+    - cron:  '0 6 * * 0-4'
+
+jobs:
+  sent-telegram-message-issue_status:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Gathering dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git python3-pip python3-venv
+          sudo pip3 install python-telegram-bot PyGithub
+      - name: run bot script
+        env:
+          BOT_SHIFT_SCHEDULER: ${{ secrets.BOT_SHIFT_SCHEDULER }}
+          CHAT_ID_ISSUES_STATUS: ${{ secrets.CHAT_ID_ISSUES_STATUS }}
+          PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+          TEST_TOKEN: ${{ secrets.TEST_TOKEN }}
+        run: |
+          sudo --preserve-env=BOT_SHIFT_SCHEDULER --preserve-env=CHAT_ID_ISSUES_STATUS --preserve-env=PROJECT_NAME --preserve-env=TEST_TOKEN \
+          python3 shift_scheduler/bot.py
