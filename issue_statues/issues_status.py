@@ -68,8 +68,11 @@ def get_status():
             needs_update.setdefault(assignee.login, [])
             needs_update[assignee.login].append(issue)
         for comment in issue.get_comments(since=update_time):
-            if issue in needs_update[comment.user.login]:
-                needs_update[comment.user.login].remove(issue)
+            try:
+                if issue in needs_update[comment.user.login]:
+                    needs_update[comment.user.login].remove(issue)
+            except:
+                pass
     
     for ass, issue in needs_update.items():
         if(issue):
