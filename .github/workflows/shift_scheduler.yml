@@ -22,7 +22,7 @@ jobs:
           BOT_SHIFT_SCHEDULER: ${{ secrets.BOT_SHIFT_SCHEDULER }}
           CHAT_ID_ISSUES_STATUS: ${{ secrets.CHAT_ID_SCHEDULER }}
         run: |
-          --preserve-env=BOT_SHIFT_SCHEDULER --preserve-env=CHAT_ID_SCHEDULER python3 shift_scheduler/shift_scheduler.py
+          sudo --preserve-env=BOT_SHIFT_SCHEDULER --preserve-env=CHAT_ID_SCHEDULER python3 shift_scheduler/shift_scheduler.py
       - name: save pointers
         uses: actions/upload-artifact@v2
         with:
