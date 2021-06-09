@@ -30,14 +30,14 @@ if __name__ == '__main__':
             f.write(pointers)
     
     
-    def schedule_suite_tests(bot):
+    def schedule_suite_tests(bot, chat_id):
         turn  = team[pointers['test']]
         message = "%s, today, it's your turn to run the testlodge scenarios" % turn
         bot.sendMessage(chat_id=chat_id, text=message)
         update_pointer('test')
 
 
-    def schedule_chat_babysitting(bot):
+    def schedule_chat_babysitting(bot, chat_id):
         turn  = team[pointers['chat']]
         message = "%s, for this week, it's your turn to babysit the chats" % turn
         bot.sendMessage(chat_id=chat_id, text=message)
@@ -62,10 +62,10 @@ if __name__ == '__main__':
     bot = telegram.Bot(token=token)
 
     
-    schedule_suite_tests(bot)
+    schedule_suite_tests(bot, chat_id)
 
     if datetime.today().isoweekday() == 7: # Sunday
-        schedule_chat_babysitting(bot)
+        schedule_chat_babysitting(bot, chat_id)
 
     
 
