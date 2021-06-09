@@ -62,10 +62,10 @@ if __name__ == '__main__':
     bot = telegram.Bot(token=token)
 
     
-    schedule_suite_tests()
+    schedule_suite_tests(bot)
 
     if datetime.today().isoweekday() == 7: # Sunday
-        schedule_chat_babysitting()
+        schedule_chat_babysitting(bot)
 
     
 
