@@ -5,7 +5,7 @@ on:
   schedule:
     - cron:  '0 6 * * 0-4'
 jobs:
-  sent-telegram-message-issue_status:
+  scheduling:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -22,7 +22,7 @@ jobs:
           BOT_SHIFT_SCHEDULER: ${{ secrets.BOT_SHIFT_SCHEDULER }}
           CHAT_ID_ISSUES_STATUS: ${{ secrets.CHAT_ID_SCHEDULER }}
         run: |
-          python3 shift_scheduler.py
+          python3 ./.github/shift_scheduler/shift_scheduler.py
       - name: save pointers
         uses: actions/upload-artifact@v2
         with:
