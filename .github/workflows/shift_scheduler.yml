@@ -1,8 +1,8 @@
-name: shift_scheduler.yml
+name: shift scheduler
 
 on:
   schedule:
-    - cron:  '0 9 * * 0-4'
+    - cron:  '0 10 * * 0-4'
 
 jobs:
   sent-telegram-message-issue_status:
