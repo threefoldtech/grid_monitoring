@@ -46,6 +46,7 @@ if __name__ == '__main__':
     
     token =  os.environ.get("BOT_SHIFT_SCHEDULER")
     chat_id = os.environ.get("CHAT_ID_SCHEDULER")
+    
 
 
     try:
@@ -54,6 +55,9 @@ if __name__ == '__main__':
         pointers = eval(pointers)
     except Exception as e:
         pointers = {'chat': 0, 'test': 0}
+        
+    pointers.set_default('chat', 0)
+    pointers.set_default('default', 0)
 
 
     team = ['@sameh_farouk', '@waleedhammam', '@ranatrk',
