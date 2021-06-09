@@ -56,8 +56,8 @@ if __name__ == '__main__':
     except Exception as e:
         pointers = {'chat': 0, 'test': 0}
         
-    pointers.set_default('chat', 0)
-    pointers.set_default('default', 0)
+    pointers.setdefault('chat', 0)
+    pointers.setdefault('default', 0)
 
 
     team = ['@sameh_farouk', '@waleedhammam', '@ranatrk',
