@@ -31,14 +31,14 @@ if __name__ == '__main__':
     
     
     def schedule_suite_tests(bot):
-        turn  = team.get(pointers['test'], '@rthursday')
+        turn  = team[pointers['test']]
         message = "%s, today, it's your turn to run the testlodge scenarios" % turn
         bot.sendMessage(chat_id=chat_id, text=message)
         update_pointer('test')
 
 
     def schedule_chat_babysitting(bot):
-        turn  = team.get(pointers['chat'], '@rthursday')
+        turn  = team[pointers['chat']]
         message = "%s, for this week, it's your turn to babysit the chats" % turn
         bot.sendMessage(chat_id=chat_id, text=message)
         update_pointer('chat')
