@@ -27,7 +27,7 @@ if __name__ == '__main__':
             
         pointers[pointer_name] = current_pointer
         with open('pointers', 'w') as f:
-            f.write(pointers)
+            f.write(pointers.__str__())
     
     
     def schedule_suite_tests(bot, chat_id):
