@@ -16,6 +16,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git python3-pip python3-venv
           sudo pip3 install python-telegram-bot
+      
+      - name: get pointers
+        uses: actions/download-artifact@v2
+        with:
+          name: pointers
 
       - name: run bot script
         env:
