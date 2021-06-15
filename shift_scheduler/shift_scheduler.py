@@ -57,7 +57,7 @@ if __name__ == '__main__':
         pointers = {'chat': 0, 'test': 0}
         
     pointers.setdefault('chat', 0)
-    pointers.setdefault('default', 0)
+    pointers.setdefault('test', 0)
 
 
     team = ['@sameh_farouk', '@waleedhammam', '@ranatrk',
