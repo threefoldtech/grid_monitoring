@@ -20,6 +20,7 @@ jobs:
       - name: get pointers
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
+          workflow: shift_scheduler.yml
           name: pointers
 
       - name: run bot script
