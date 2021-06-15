@@ -17,11 +17,11 @@ jobs:
           sudo apt-get install -y git python3-pip python3-venv
           sudo pip3 install python-telegram-bot
       
-     # - name: get pointers
-     #   uses: dawidd6/action-download-artifact@v2.14.0
-     #   with:
-     #     workflow: shift_scheduler.yml
-     #     name: pointers
+      - name: get pointers
+        uses: dawidd6/action-download-artifact@v2.14.0
+        with:
+          workflow: shift_scheduler.yml
+          name: pointers
 
       - name: run bot script
         env:
