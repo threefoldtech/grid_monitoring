@@ -21,6 +21,12 @@ jobs:
         env:
           BOT_SHIFT_SCHEDULER: ${{ secrets.BOT_SHIFT_SCHEDULER }}
           CHAT_ID_SCHEDULER: ${{ secrets.CHAT_ID_SCHEDULER }}
-          GITHUB_TOKEN_SCHEDULER: ${{ secrets.GITHUB_TOKEN_SCHEDULER }}
+          TOKEN_GITHUB_SCHEDULER: ${{ secrets.TOKEN_GITHUB_SCHEDULER }}
         run: |
-          sudo --preserve-env=BOT_SHIFT_SCHEDULER --preserve-env=CHAT_ID_SCHEDULER --preserve-env=GITHUB_TOKEN_SCHEDULER python3 shift_scheduler/shift_scheduler.py
+          sudo --preserve-env=BOT_SHIFT_SCHEDULER --preserve-env=CHAT_ID_SCHEDULER --preserve-env=TOKEN_GITHUB_SCHEDULER python3 shift_scheduler/shift_scheduler.py
+      
+      
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.TOKEN_GITHUB_SCHEDULER }}
