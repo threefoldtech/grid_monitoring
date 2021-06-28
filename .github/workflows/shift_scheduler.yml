@@ -16,21 +16,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git python3-pip python3-venv
           sudo pip3 install python-telegram-bot
-      
-      - name: get pointers
-        uses: dawidd6/action-download-artifact@v2.14.0
-        with:
-          workflow: shift_scheduler.yml
-          name: pointers
 
       - name: run bot script
         env:
           BOT_SHIFT_SCHEDULER: ${{ secrets.BOT_SHIFT_SCHEDULER }}
           CHAT_ID_SCHEDULER: ${{ secrets.CHAT_ID_SCHEDULER }}
+          GITHUB_TOKEN_SCHEDULER: ${{ secrets.GITHUB_TOKEN_SCHEDULER }}
         run: |
-          sudo --preserve-env=BOT_SHIFT_SCHEDULER --preserve-env=CHAT_ID_SCHEDULER python3 shift_scheduler/shift_scheduler.py
-      - name: save pointers
-        uses: actions/upload-artifact@v2
-        with:
-          name: save pointers
-          path: pointers
+          sudo --preserve-env=BOT_SHIFT_SCHEDULER --preserve-env=CHAT_ID_SCHEDULER --preserve-env=GITHUB_TOKEN_SCHEDULER python3 shift_scheduler/shift_scheduler.py
