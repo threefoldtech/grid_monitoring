@@ -2,8 +2,8 @@ name: shift scheduler
 
 on:
   workflow_dispatch:
- # schedule:
- #   - cron:  '0 6 * * 0-4'
+  schedule:
+    - cron:  '0 6 * * 0-4'
 jobs:
   scheduling:
     runs-on: ubuntu-20.04
@@ -27,6 +27,6 @@ jobs:
       
       
       - name: Commit & Push changes
-        uses: ad-m/github-push-action@master
+        uses: actions-js/push@master
         with:
           github_token: ${{ secrets.TOKEN_GITHUB_SCHEDULER }}
