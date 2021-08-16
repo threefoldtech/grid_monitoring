@@ -28,6 +28,6 @@ jobs:
       
       - name: Commit & Push changes
         uses: actions-js/push@master
-        branch: master
         with:
           github_token: ${{ secrets.TOKEN_GITHUB_SCHEDULER }}
+          branch: master
