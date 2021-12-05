@@ -28,26 +28,26 @@ def _get_free_balances(network, address):
 EXPLORERS = {
     "mainnet": "https://explorer.grid.tf/api/v1",
     "testnet": "https://explorer.testnet.grid.tf/api/v1",
-    "devnet": "https://explorer.devnet.grid.tf/api/v1",
+    # "devnet": "https://explorer.devnet.grid.tf/api/v1",
 }
 
 WALLETS = {
     "mainnet": { "addr": "GB44ZXTSQCJEIVP3ROBXXA3VXJFBSATG5HPRSGRFYLYRIHJK6K27CT2F", "XLM":500},
     "testnet": {"addr":""},
-    "devnet": {"addr":""},
+    # "devnet": {"addr":""},
     "trader_mainnet": {"addr":"GA4YOREDKBA5AIUGFERRL4XRXHDX3467M7YRYQVYIPOCABZBXGQMURBY", "TFT":10},
     "itenv_mainnet": {"addr": "GDYTMB2TLKGTYGY3ZTURZ7F36BVYECQXBKZBZ6X6XSFWLUXC4VGXSUIL", "TFT":10},
     "3botdeployer_mainnet": {"addr":"GD2G5KZE37CT43RLYJL6XS5JVU7JPO7EVKWLDGC36GTW5NMLVI3FSHHG", "TFT":100},
     "3botdeployer_testnet": {"addr":"GBUG3IRHFPFTK4FZWZ443QF6ZJOQFEGEUOSHBG2XYXZYZPH4WLRNPTV7", "TFT":10},
-    "3botdeployer_devnet": {"addr":"GD547XQCD5YMUT7DB3LRNZJYQTQY3B3RWDLV36HUNEJSBFYDSOQLS6ZV", "TFT":10},
+    # "3botdeployer_devnet": {"addr":"GD547XQCD5YMUT7DB3LRNZJYQTQY3B3RWDLV36HUNEJSBFYDSOQLS6ZV", "TFT":10},
     "marketplace_testnet": {"addr":"GAIAPQH253RYJDVBUI3VFIQBHJLSBV26WIDRAUONNTQAE5RUIA76X74U", "TFT":10},
-    "marketplace_devnet": {"addr":"GAIAPQH253RYJDVBUI3VFIQBHJLSBV26WIDRAUONNTQAE5RUIA76X74U", "TFT":10},
+    # "marketplace_devnet": {"addr":"GAIAPQH253RYJDVBUI3VFIQBHJLSBV26WIDRAUONNTQAE5RUIA76X74U", "TFT":10},
     "activation_service_mainnet": {"addr": "GCKLGWHEYT2V63HC2VDJRDWEY3G54YSHHPOA6Q3HAPQUGA5OZDWZL7KW", "XLM":200},
     "vdc_activation_testnet": {"addr": "GDRUIAIQPQOWB4ZMSRS74NU4KYAXLLICFDHMEGJBTPDZJHMGUZWIQ2OO", "XLM":100},
-    "vdc_activation_devnet": {"addr": "GA4PIU2MV4UJ5QQ7VEP72V24KP7OBEMWUOOPFIYALVEW6QNU5DDWFTIG", "XLM":100},
+    # "vdc_activation_devnet": {"addr": "GA4PIU2MV4UJ5QQ7VEP72V24KP7OBEMWUOOPFIYALVEW6QNU5DDWFTIG", "XLM":100},
     "explorer_mainnet": {"addr": "GB44ZXTSQCJEIVP3ROBXXA3VXJFBSATG5HPRSGRFYLYRIHJK6K27CT2F", "XLM":20},
     "vdc_init_testnet": {"addr": "GA4THK7I6ME27FYW5JCIHM5QI36TPXC2U6NUCH3YIKZLT6BIFOE4P2OQ", "TFT":50},
-    "vdc_init_devnet": {"addr": "GBV5LQTVRJZGP47HOM24R5JPOXB4NYBPTAAH2WDP2OWU4AZCE4JYXFJJ", "TFT":50}
+    # "vdc_init_devnet": {"addr": "GBV5LQTVRJZGP47HOM24R5JPOXB4NYBPTAAH2WDP2OWU4AZCE4JYXFJJ", "TFT":50}
 }
     # "polls_mainnet": {"addr":"GBL6CIPM3CJLVTDLL5CIYGCAKOK7SZ3BXU5S3QSYDH4KCU2SZUA5VIMC", "TFT":10},
     # "tft_faucet_testnet": {"addr":"GBK7KX7KSOK2IISWPS3LWIBWJ2XTRJCST3W5MEUKKY5NGKNO5KBF6ZQI", "TFT":10},
@@ -138,10 +138,10 @@ PUBLIC_IP_FARMS = {"devnet": "lochristi_dev_lab", "testnet": "freefarm", "mainne
 DEFAULT_EXPLORER_URLS = {
     "mainnet": "https://explorer.grid.tf/api/v1",
     "testnet": "https://explorer.testnet.grid.tf/api/v1",
-    "devnet": "https://explorer.devnet.grid.tf/api/v1",
+    # "devnet": "https://explorer.devnet.grid.tf/api/v1",
 }
 
-def get_public_ip_usage(explorer_name: str = "devnet"):
+def get_public_ip_usage(explorer_name: str = "testnet"):
 
     explorer = j.clients.explorer.get_by_url(DEFAULT_EXPLORER_URLS[explorer_name])
     c = 0
@@ -197,13 +197,13 @@ def check_grid(self):
     e2 = check_wallets()
     e3 = check_gateways()
     e4 = check_threefold_services()
-    e5 = get_public_ip_usage("devnet")
+    # e5 = get_public_ip_usage("devnet")
     e6 = get_public_ip_usage("testnet")
     e7 = ssl.get_ssl_cert_monitoring()
     e8 = check_access_nodes()
     j.core.identity.delete(identity_name)
 
-    return [e1, e2, e3, e4, e5, e6, e7, e8]
+    return [e1, e2, e3, e4, e6, e7, e8]
 
 # class Test:
 #     pass
