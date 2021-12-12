@@ -63,7 +63,8 @@ if __name__ == '__main__':
     team = ['@sameh_farouk', '@waleedhammam', '@ranatrk',
             '@melborolossy', '@abomdev', '@ahmedhanafy725', 
             '@RafyBenjamin', '@dmahmou',  '@oElawady', 
-            '@ashraffouda', '@MohamedElmdary']
+            '@ashraffouda', '@MohamedElmdary',
+            '@asamirr', '@omarabdul3ziz']
     bot = telegram.Bot(token=token)
 
     
